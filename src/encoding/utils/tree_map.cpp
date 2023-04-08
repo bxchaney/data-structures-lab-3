@@ -2,6 +2,7 @@
 #include<memory>
 #include<string>
 #include"tree_map.h"
+#include"freq_table.h"
 
 TreeRecord::TreeRecord()
 {
@@ -347,4 +348,19 @@ void TreeMap::visit(std::shared_ptr<TreeNode> node)
     std::cout << node->record.str << " " << left_data << " " << right_data << std::endl;
     visit(node->left);
     visit(node->right);
+}
+
+void TreeMap::push_values(FrequencyTable& ft, std::shared_ptr<TreeNode> node)
+{
+    if (node == nullptr) return;
+    push_values(ft, node->left);
+    ft.push(node->record.str, node->record.frequency);
+    push_values(ft, node->right);
+}
+
+void TreeMap::fill_freq_table(FrequencyTable& ft)
+{
+    // Assuming the ft is empty, push all elements in TreeMap
+    // to ft in order.
+    push_values(ft, root);
 }
