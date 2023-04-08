@@ -22,7 +22,6 @@ TreeMap::TreeNode::TreeNode()
     left = nullptr;
     right = nullptr;
     height = 0;
-    balance = 0;
     TreeRecord record {};
 }
 
@@ -32,7 +31,6 @@ TreeMap::TreeNode::TreeNode(TreeRecord& rec)
     left = nullptr;
     right = nullptr;
     height = 0;
-    balance = 0;
     record = std::move(rec);
 }
 
@@ -49,13 +47,6 @@ TreeMap::TreeMap()
     root = nullptr;
     _size = 0;
     
-}
-
-TreeMap::TreeMap(const TreeMap& other)
-{
-    root = nullptr;
-    _size = 0;
-
 }
 
 TreeMap::~TreeMap()

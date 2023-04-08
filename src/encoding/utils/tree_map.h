@@ -27,7 +27,6 @@ class TreeMap
         {
             std::shared_ptr<TreeNode> parent, left, right;
             int height;
-            int balance;
             
             TreeRecord record;
             
@@ -78,9 +77,9 @@ class TreeMap
         TreeMap();
         ~TreeMap();
 
-        TreeMap(const TreeMap&);
+        TreeMap(const TreeMap&) = delete;
 
-        TreeMap& operator=(const TreeMap&);
+        // TreeMap& operator=(const TreeMap&);
 
         // allowing user to access nodes in this object via bracket op
         TreeRecord& operator[] (std::string);
