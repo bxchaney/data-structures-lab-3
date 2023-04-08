@@ -14,10 +14,10 @@ target_compile_options(compiler_flags INTERFACE
   "$<${msvc_cxx}:$<BUILD_INTERFACE:-W3>>"
 )
 
-add_subdirectory(huffman)
-add_subdirectory(tree_map)
+add_subdirectory(encoding)
+
 
 add_executable(Lab3 main.cpp)
 
-target_link_libraries(Lab3 PUBLIC huffman tree_map)
+target_link_libraries(Lab3 PUBLIC encoding)
 
