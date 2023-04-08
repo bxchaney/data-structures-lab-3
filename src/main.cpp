@@ -1,7 +1,8 @@
 #include<iostream>
 #include<memory>
 #include<string>
-#include"tree_map.h"
+#include"encoding/utils/tree_map.h"
+#include"encoding/utils/freq_table.h"
 
 
 int main()
@@ -9,9 +10,23 @@ int main()
     
     TreeMap map {};
 
-    map["s"];
-    map["s"]++;
+    map["a"]++;
+    map["b"];
+    map["c"];
+    map["d"];
+    map["f"]++;
+    map["g"];
+    map["h"];
+    map["i"];
+    map["j"];
+    map["k"];
 
-    std::cout << map["s"].frequency << std::endl;
+    FrequencyTable ft {};
+
+    map.preorder_traversal();
+
+    map.fill_freq_table(ft);
+
+    std::cout << ft << std::endl;
 
 }
