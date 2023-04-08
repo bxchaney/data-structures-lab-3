@@ -4,5 +4,6 @@ class Huffman {
 
     public:
         Huffman();
+        ~Huffman();
         
 };
