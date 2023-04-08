@@ -2,7 +2,7 @@
  * Frequency table is doubly-linked list
  * 
  */
-
+#pragma once
 #include<iostream>
 #include<memory>
 #include<string>

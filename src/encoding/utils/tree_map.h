@@ -1,6 +1,7 @@
+#pragma once
 #include<memory>
 #include<string>
-
+#include"freq_table.h"
 
 struct TreeRecord
 {
@@ -70,6 +71,8 @@ class TreeMap
 
         void visit(std::shared_ptr<TreeNode>);
 
+        void push_values(FrequencyTable&, std::shared_ptr<TreeNode>);
+
     public:
 
         TreeMap();
@@ -84,7 +87,6 @@ class TreeMap
 
         void preorder_traversal();
 
-        
-        // void remove(std::string);
+        void fill_freq_table(FrequencyTable&);
 
 };
