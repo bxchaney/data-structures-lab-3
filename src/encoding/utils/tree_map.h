@@ -68,6 +68,7 @@ class TreeMap
 
         int max(int, int);
 
+        void visit(std::shared_ptr<TreeNode>);
 
     public:
 
@@ -80,6 +81,8 @@ class TreeMap
 
         // allowing user to access nodes in this object via bracket op
         TreeRecord& operator[] (std::string);
+
+        void preorder_traversal();
 
         
         // void remove(std::string);

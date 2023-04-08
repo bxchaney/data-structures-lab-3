@@ -12,7 +12,7 @@ TreeRecord::TreeRecord()
 TreeRecord::TreeRecord(std::string str)
 {
     this->str = str;
-    frequency = 1;
+    frequency = 0;
 }
 
 TreeMap::TreeNode::TreeNode()
@@ -88,6 +88,7 @@ void TreeMap::insert(std::string str)
             if (curr->left == nullptr)
             {
                 set_child(curr, 0, node);
+                break;
             }
             else 
             {
@@ -100,6 +101,7 @@ void TreeMap::insert(std::string str)
             {
                 // set right as new node
                 set_child(curr, 1, node);
+                break;
             }
             else 
             {
@@ -314,4 +316,35 @@ int TreeMap::max(int a, int b)
 {
     if (a >= b) return a;
     return b;
+}
+
+void TreeMap::preorder_traversal()
+{
+    if (root == nullptr)
+    {
+        std::cout << "No Nodes!" << std::endl;
+    }
+
+    visit(root);
+
+}
+
+void TreeMap::visit(std::shared_ptr<TreeNode> node)
+{
+    if (node == nullptr) return;
+    std::string left_data;
+    std::string right_data;
+    
+    if (node->left != nullptr)
+    {
+        left_data = node->left->record.str;
+    }
+    if (node->right != nullptr)
+    {
+        right_data = node->right->record.str;
+    }
+
+    std::cout << node->record.str << " " << left_data << " " << right_data << std::endl;
+    visit(node->left);
+    visit(node->right);
 }

@@ -1,0 +1,8 @@
+
+
+class Huffman {
+
+    public:
+        Huffman();
+        
+};
