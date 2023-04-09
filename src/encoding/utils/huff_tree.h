@@ -11,6 +11,7 @@ class HuffTree
         {
             std::string str;
             int total;
+            bool is_leaf;
 
             std::shared_ptr<HuffNode> left;
             std::shared_ptr<HuffNode> right;

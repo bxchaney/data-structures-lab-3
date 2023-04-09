@@ -7,6 +7,7 @@ HuffTree::HuffNode::HuffNode(std::string& str, int tot)
 {
     this->str = str;
     total = tot;
+    is_leaf = true;
     left = nullptr;
     right = nullptr;
 }
@@ -41,6 +42,7 @@ HuffTree operator + (HuffTree& l_op, HuffTree& r_op)
     new_huff.root 
         = std::shared_ptr<HuffTree::HuffNode>(
             new HuffTree::HuffNode(new_str, new_total));
+    new_huff.root->is_leaf = false;
     new_huff.root->left = l_op.root;
     new_huff.root->right = r_op.root;
     return new_huff;
