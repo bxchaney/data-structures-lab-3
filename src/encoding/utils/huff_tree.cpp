@@ -34,6 +34,49 @@ HuffTree& HuffTree::operator=(const HuffTree&& other)
     return *this;
 }
 
+bool HuffTree::is_character_encoding(std::string& str)
+{
+    // given a string of 0's and 1's, confirm if that string is an encoded
+    // letter
+    std::shared_ptr<HuffNode> curr_node = root;
+    for (int i = 0; i < str.length(); i++) 
+    {
+        auto c = str[i];
+        if (c == '0')
+        {
+            curr_node = curr_node->left;
+        }
+        else 
+        {
+            curr_node = curr_node->right;
+        }
+
+        if (curr_node == nullptr) return false;
+    }
+    return curr_node->is_leaf;
+}
+
+std::string HuffTree::get_character(std::string& str)
+{
+    std::shared_ptr<HuffNode> curr_node = root;
+    for (int i = 0; i < str.length(); i++) 
+    {
+        auto c = str[i];
+        if (c == '0')
+        {
+            curr_node = curr_node->left;
+        }
+        else 
+        {
+            curr_node = curr_node->right;
+        }
+
+        if (curr_node == nullptr) return "";
+    }
+    return curr_node->str;
+}
+
+
 std::string HuffTree::get_code(std::string& c)
 {
     std::string out = "";
