@@ -147,12 +147,12 @@ std::ostream& operator<<(std::ostream& os, Huffman& huff)
     return os;
 }
 
-bool Huffman::is_character_encoding(std::string str)
+bool Huffman::is_character_encoding(std::string& str)
 {
     return huff_heap[0].is_character_encoding(str);
 }
 
-std::string& Huffman::get_character(std::string str)
+std::string& Huffman::get_character(std::string& str)
 {
     return huff_heap[0].get_character(str);
 }
