@@ -1,42 +1,47 @@
 #include<iostream>
 #include<memory>
 #include<string>
-#include"encoding/utils/tree_map.h"
-#include"encoding/utils/freq_table.h"
-#include"encoding/utils/huff_tree.h"
+#include<fstream>
+#include"encoding/decoder.h"
+#include"encoding/utils/code_table.h"
 
 
-int main()
+int main(int argc, char* argv[])
 {
-    HuffTree h1 {"b", 1};
-    HuffTree h2 {"a", 1};
+    if (argc == 3)
+    {
+        std::filebuf fb_freq_table;
+        std::filebuf fb_message;
+        if (!fb_freq_table.open(argv[1], std::ios::in))
+        {
+        std::cout << "Problem opening frequency table!" << std::endl;
+        return -1;
+        }
 
-    HuffTree h3 = h1 + h2;
+        if (!fb_message.open(argv[2], std::ios::in))
+        {
+            std::cout << "Problem opening message!" << std::endl;
+            return -1;
+        }
 
-    std::cout << h3 << std::endl;
+        std::istream is_freq_table {&fb_freq_table};
+        std::istream is_message {&fb_message};
 
-    std::cout << (h1 < h2) << std::endl;
+        Decoder dec {is_freq_table};
+
+        // std::cout << dec.get_freq_table() << std::endl;
+
+        dec.decode(is_message);
+
+        EncodingTable et = dec.get_code_table();
+        std::cout << et << std::endl;
+        // std::cout << "lol" << std::endl;
+        std::cout << dec << std::endl;
+        return 0;
+    }
 
 
-    // TreeMap map {};
-
-    // map["a"]++;
-    // map["b"];
-    // map["c"];
-    // map["d"];
-    // map["f"]++;
-    // map["g"];
-    // map["h"];
-    // map["i"];
-    // map["j"];
-    // map["k"];
-
-    // FrequencyTable ft {};
-
-    // map.preorder_traversal();
-
-    // map.fill_freq_table(ft);
-
-    // std::cout << ft << std::endl;
+    
+    
 
 }
