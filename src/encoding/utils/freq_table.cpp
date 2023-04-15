@@ -40,6 +40,28 @@ FrequencyTable::~FrequencyTable()
     _tail = nullptr;
 }
 
+FrequencyTable::FrequencyTable(std::istream& is)
+{
+    _size = 0;
+    _head = nullptr;
+    _tail = nullptr;
+    // assuming the istream is of the form:
+    // c - 123
+    // where each line has exactly one character, " - ", then an integer
+    // followed by a newline.
+    std::string s;
+    std::string _;
+    int i; 
+    while (!is.eof())
+    {
+        is >> s;
+        is >> _;
+        is >> i;
+        if (is.eof()) break;
+        push(s,i);
+    } 
+}
+
 FrequencyTable::FrequencyTable(const FrequencyTable& other)
 {
     _head = nullptr;

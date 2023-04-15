@@ -36,6 +36,7 @@ class FrequencyTable
     public:     
 
         FrequencyTable();
+        FrequencyTable(std::istream&);
         ~FrequencyTable();
         
         // Overloading copy constructor and assignment copy
