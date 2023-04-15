@@ -15,8 +15,7 @@ class Encoder
         bool _freq_table_provided;
         TreeMap tree_map;
 
-        std::filebuf encoding_buffer;
-        std::ostream encoded_message {&encoding_buffer};
+        std::stringstream encoded_message;
 
         std::stringstream s_stream;
 
