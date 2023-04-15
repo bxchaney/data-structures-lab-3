@@ -1,10 +1,10 @@
 #pragma once
+#include<iostream>
 #include<memory>
 #include<string>
 #include"huff_tree.h"
 #include"freq_table.h"
-
-
+#include"code_table.h"
 
 class Huffman 
 {
@@ -13,18 +13,30 @@ class Huffman
         int _heap_size;        
         int _heap_max_size;
 
-        void percolate_down();
-        void percolate_up();
-        HuffTree& pop();
+        std::unique_ptr<std::string[]> characters;
+
+        void heapify();
+        void min_heapify(int);
+        void swap(int, int);
+
+        void percolate_down(int);
+        void percolate_up(int);
+        HuffTree pop();
         void push(HuffTree&);
+        void create_huff_tree();
+
 
     public:
         Huffman() = default;
         Huffman(FrequencyTable);
-        ~Huffman();
+        ~Huffman() = default;
         
         bool is_character(std::string);
         std::string get_character(std::string);
 
         std::string get_code(std::string);
+
+        EncodingTable get_encoding_table();
+
+        friend std::ostream& operator<<(std::ostream&, Huffman&);
 };
