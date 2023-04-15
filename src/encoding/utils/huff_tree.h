@@ -32,6 +32,8 @@ class HuffTree
         HuffTree& operator = (const HuffTree&);
         HuffTree& operator=(const HuffTree&&);
 
+        std::string get_code(std::string&);
+
         friend HuffTree operator + (HuffTree&, HuffTree&);
         friend bool operator < (HuffTree&, HuffTree&);
         friend std::ostream& operator<<(std::ostream&, const HuffTree&);
