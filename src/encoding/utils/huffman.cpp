@@ -30,6 +30,29 @@ Huffman::Huffman(FrequencyTable ft)
     create_huff_tree();
 }
 
+void Huffman::from_freq(FrequencyTable ft)
+{
+    huff_heap 
+        = std::unique_ptr<HuffTree[]>(
+            new HuffTree[ft.size()]
+        );
+    _heap_size = ft.size();
+    _heap_max_size = ft.size();
+
+    characters 
+        = std::unique_ptr<std::string[]>(
+            new std::string[ft.size()]
+        );
+
+    for (int i = 0; i< _heap_max_size; i++)
+    {
+        FrequencyTableRecord rec = ft.pop();
+        huff_heap[i] = HuffTree{rec.str, rec.frequency};
+        characters[i] = rec.str;
+    }
+    heapify();
+    create_huff_tree();
+}
 
 
 void Huffman::heapify() 
@@ -165,7 +188,7 @@ std::string Huffman::get_code(std::string c)
 EncodingTable Huffman::get_encoding_table()
 {
     EncodingTable code_table {};
-    for (int i = 0; i < _heap_max_size; i++)
+    for (int i = _heap_max_size - 1; i >= 0; i--)
     {
         std::string encoding = get_code(characters[i]);
         code_table.push(characters[i], encoding);

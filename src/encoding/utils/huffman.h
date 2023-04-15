@@ -31,6 +31,8 @@ class Huffman
         Huffman(FrequencyTable);
         ~Huffman() = default;
         
+        void from_freq(FrequencyTable);
+
         bool is_character_encoding(std::string&);
         std::string& get_character(std::string&);
 
