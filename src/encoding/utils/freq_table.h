@@ -47,7 +47,7 @@ class FrequencyTable
         friend std::ostream& operator << (std::ostream&, FrequencyTable&);
 
         void push(std::string, int);
-        void push(FrequencyTableRecord&);
+        void push(FrequencyTableRecord);
         FrequencyTableRecord& pop();
         int size();
         bool is_empty();

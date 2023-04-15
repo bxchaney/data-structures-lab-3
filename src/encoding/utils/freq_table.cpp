@@ -118,7 +118,7 @@ void FrequencyTable::push(std::string str, int frequency)
     _size++;
 }
 
-void FrequencyTable::push(FrequencyTableRecord& rec)
+void FrequencyTable::push(FrequencyTableRecord rec)
 {
     std::shared_ptr<FrequencyTableNode> node 
         = std::shared_ptr<FrequencyTableNode>(new FrequencyTableNode(rec));
