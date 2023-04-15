@@ -36,15 +36,12 @@ class TreeMap
 
             ~TreeNode() = default;
             TreeNode(const TreeNode&);
-            // TreeNode& operator=(const TreeNode&);
-            // TreeNode& operator=(const TreeNode&&);
         };
         
         std::shared_ptr<TreeNode> root;
         int _size;
 
         void insert(std::string);
-        bool search(std::string);
         TreeRecord& get(std::string);
 
         void update_height(std::shared_ptr<TreeNode>);
@@ -79,7 +76,7 @@ class TreeMap
 
         TreeMap(const TreeMap&) = delete;
 
-        // TreeMap& operator=(const TreeMap&);
+        bool search(std::string);
 
         // allowing user to access nodes in this object via bracket op
         TreeRecord& operator[] (std::string);
