@@ -39,7 +39,8 @@ bool HuffTree::is_character_encoding(std::string& str)
     // given a string of 0's and 1's, confirm if that string is an encoded
     // letter
     std::shared_ptr<HuffNode> curr_node = root;
-    for (int i = 0; i < str.length(); i++) 
+    int str_size = str.length();
+    for (int i = 0; i < str_size; i++) 
     {
         auto c = str[i];
         if (c == '0')
@@ -59,7 +60,8 @@ bool HuffTree::is_character_encoding(std::string& str)
 std::string& HuffTree::get_character(std::string& str)
 {
     std::shared_ptr<HuffNode> curr_node = root;
-    for (int i = 0; i < str.length(); i++) 
+    int str_size = str.length();
+    for (int i = 0; i < str_size; i++) 
     {
         auto c = str[i];
         if (c == '0')
