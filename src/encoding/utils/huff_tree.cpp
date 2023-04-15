@@ -56,7 +56,7 @@ bool HuffTree::is_character_encoding(std::string& str)
     return curr_node->is_leaf;
 }
 
-std::string HuffTree::get_character(std::string& str)
+std::string& HuffTree::get_character(std::string& str)
 {
     std::shared_ptr<HuffNode> curr_node = root;
     for (int i = 0; i < str.length(); i++) 
@@ -70,8 +70,6 @@ std::string HuffTree::get_character(std::string& str)
         {
             curr_node = curr_node->right;
         }
-
-        if (curr_node == nullptr) return "";
     }
     return curr_node->str;
 }

@@ -33,7 +33,7 @@ class HuffTree
         HuffTree& operator=(const HuffTree&&);
 
         bool is_character_encoding(std::string&);
-        std::string get_character(std::string&);
+        std::string& get_character(std::string&);
         std::string get_code(std::string&);
 
         friend HuffTree operator + (HuffTree&, HuffTree&);
