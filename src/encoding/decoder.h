@@ -2,6 +2,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<sstream>
 #include<memory>
 #include"utils/freq_table.h"
 #include"utils/huffman.h"
@@ -14,8 +15,7 @@ class Decoder
         FrequencyTable ft;
         Huffman huff;
 
-        std::filebuf buffer;
-        std::ostream decoded_message {&buffer};
+        std::stringstream decoded_message;
 
     public:
         Decoder() = default;

@@ -22,7 +22,6 @@ void Decoder::decode(std::istream& is)
         if (c == '\n')
         {
             if( s != "" && s != "\r") { std::cout << "uh oh: |" << s << "|"<< std::endl;}
-            std::cout << std::endl;
             decoded_message << std::endl;
             s = "";
             continue;
@@ -31,7 +30,6 @@ void Decoder::decode(std::istream& is)
         if (huff.is_character_encoding(s))
         {
             std::string x = huff.get_character(s);
-            std::cout << x;
             decoded_message << x;
             s = "";
         }

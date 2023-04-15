@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
             // std::cout << dec << std::endl;
             out_mesg << dec;
             std::cout << "Successfully decoded message!" << std::endl;
-            
+            fb_output.close();
         }
     }
    
