@@ -5,7 +5,7 @@
 #include<sstream>
 #include"encoding/decoder.h"
 #include"encoding/encoder.h"
-#include"encoding/utils/code_table.h"
+#include"encoding/utils/freq_table.h"
 
 
 int main(int argc, char* argv[])
@@ -100,11 +100,75 @@ int main(int argc, char* argv[])
                 os_code << en.get_code_table();
                 os_encoded_file << en;
 
+                fb_in.close();
+                fb_freq_file.close();
+                fb_code_file.close();
+                fb_encoded_file.close();
+
+
             }
+            else if (argc == 4)
+            {
+                // when -e flag and 4 args, expecting to recieve a freq table
+                // and the message to be encoded.
+                
+                std::filebuf fb_freq;
+                std::filebuf fb_msg;
+                std::filebuf fb_codes;
+                std::filebuf fb_coded_msg;
+
+                std::string message_file = argv[3];
+
+                if (!fb_freq.open(argv[2], std::ios::in))
+                {
+                    std::cout << "Problem opening frequency table!" << std::endl;
+                    return -1;
+                }
+                if (!fb_msg.open(message_file, std::ios::in))
+                {
+                    std::cout << "Problem opening message file!" << std::endl;
+                    return -1;
+                }
+
+
+                std::string codes_str = "codes_" + message_file;
+                std::string encoded_message = "encoded_" + message_file;
+
+                fb_codes.open(codes_str, std::ios::out);
+                fb_coded_msg.open(encoded_message, std::ios::out);
+
+                std::istream freq_stream {&fb_freq};
+                std::istream msg_stream {&fb_msg};
+                
+                FrequencyTable ft {freq_stream};
+
+                Encoder en {ft};
+
+                en.encode(msg_stream);
+
+                std::ostream codes {&fb_codes};
+                std::ostream out_msg {&fb_coded_msg};
+
+                codes << en.get_code_table();
+                out_msg << en;
+                
+                fb_freq.close();
+                fb_msg.close();
+                fb_codes.close();
+                fb_coded_msg.close();
+
+            }
+            else
+            {
+                return -1;
+            }
+            std::cout << "Successfully encoded message!" << std::endl;
+
         }
         else 
         {
-            std::cout << "Invalid second argument" << std::endl;
+            std::cout << "Invalid second argument, expecting either '-d' for ";
+            std::cout << "decoding, or '-e' for encoding." << std::endl;
             return -1;
         }
     }
