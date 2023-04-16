@@ -4,6 +4,7 @@
 #include<fstream>
 #include<sstream>
 #include"encoding/decoder.h"
+#include"encoding/encoder.h"
 #include"encoding/utils/code_table.h"
 
 
@@ -60,6 +61,51 @@ int main(int argc, char* argv[])
             out_mesg << dec;
             std::cout << "Successfully decoded message!" << std::endl;
             fb_output.close();
+        }
+        else if (flag == "-e")
+        {
+            // assuming if -e flag then the next arg is the file to be encoded
+            if (argc == 3)
+            {
+                std::string source_file = argv[2];
+                std::string freq_file = "frequency_table_" + source_file;
+                std::string codes = "codes_" + source_file;
+                std::string encoded_string = "encoded_" + source_file;
+
+                Encoder en {};
+
+                std::filebuf fb_in;
+                std::filebuf fb_freq_file;
+                std::filebuf fb_code_file;
+                std::filebuf fb_encoded_file;
+
+                if (!fb_in.open(source_file, std::ios::in))
+                {
+                    std::cout << "Problem opening source file!" << std::endl;
+                    return -1;
+                }
+                fb_freq_file.open(freq_file, std::ios::out);
+                fb_code_file.open(codes, std::ios::out);
+                fb_encoded_file.open(encoded_string, std::ios::out);
+                
+                std::istream is {&fb_in};
+
+                en.encode(is);
+
+                std::ostream os_freq {&fb_freq_file};
+                std::ostream os_code {&fb_code_file};
+                std::ostream os_encoded_file {&fb_encoded_file};
+
+                os_freq << en.get_frequency_table();
+                os_code << en.get_code_table();
+                os_encoded_file << en;
+
+            }
+        }
+        else 
+        {
+            std::cout << "Invalid second argument" << std::endl;
+            return -1;
         }
     }
    
