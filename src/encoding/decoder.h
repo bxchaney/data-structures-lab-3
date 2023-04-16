@@ -26,7 +26,9 @@ class Decoder
 
         FrequencyTable& get_freq_table();
 
-        EncodingTable get_code_table();
+        EncodingTable& get_code_table();
+
+        HuffTree& get_tree(){return huff.get_tree();}
 
         friend std::ostream& operator<<(std::ostream&, Decoder&);
 

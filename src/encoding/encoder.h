@@ -34,6 +34,7 @@ class Encoder
 
         FrequencyTable& get_frequency_table();
         EncodingTable& get_code_table();
+        HuffTree& get_tree() { return huff.get_tree();}
 
 
         friend std::ostream& operator<<(std::ostream&, Encoder&);

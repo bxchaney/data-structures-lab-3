@@ -57,8 +57,14 @@ int main(int argc, char* argv[])
             Decoder dec {in_freq};
             dec.decode(in_mesg);
 
-            // std::cout << dec << std::endl;
+            
             out_mesg << dec;
+
+            std::cout << "Preorder Huffman Tree Traversal:" << std::endl;
+            std::cout << dec.get_tree() <<std::endl;;
+
+            std::cout << "Encoding Table:" << std::endl;
+            std::cout << dec.get_code_table();
             std::cout << "Successfully decoded message!" << std::endl;
             fb_output.close();
         }
@@ -99,6 +105,12 @@ int main(int argc, char* argv[])
                 os_freq << en.get_frequency_table();
                 os_code << en.get_code_table();
                 os_encoded_file << en;
+
+                std::cout << "Preorder Huffman Tree Traversal:" << std::endl;
+                std::cout << en.get_tree() <<std::endl;;
+
+                std::cout << "Encoding Table:" << std::endl;
+                std::cout << en.get_code_table();
 
                 fb_in.close();
                 fb_freq_file.close();
@@ -151,6 +163,12 @@ int main(int argc, char* argv[])
 
                 codes << en.get_code_table();
                 out_msg << en;
+
+                std::cout << "Preorder Huffman Tree Traversal:" << std::endl;
+                std::cout << en.get_tree() <<std::endl;;
+
+                std::cout << "Encoding Table:" << std::endl;
+                std::cout << en.get_code_table();
                 
                 fb_freq.close();
                 fb_msg.close();

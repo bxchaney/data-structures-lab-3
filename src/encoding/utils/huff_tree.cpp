@@ -3,13 +3,27 @@
 #include<string>
 #include"huff_tree.h"
 
-HuffTree::HuffNode::HuffNode(std::string& str, int tot)
+HuffNode::HuffNode(std::string& str, int tot)
 {
     this->str = str;
     total = tot;
     is_leaf = true;
     left = nullptr;
     right = nullptr;
+}
+
+std::ostream& operator<<(std::ostream& os, const HuffNode& node)
+{
+    os << node.str << ": " << node.total << "; " << std::endl;
+    if (node.left != nullptr)
+    {
+        os << *node.left;
+    }
+    if (node.right != nullptr)
+    {
+        os << *node.right;
+    }
+    return os;
 }
 
 HuffTree::HuffTree(std::string str, int total)
@@ -107,8 +121,8 @@ HuffTree operator + (HuffTree& l_op, HuffTree& r_op)
     int new_total = l_op.root->total + r_op.root->total;
     HuffTree new_huff;
     new_huff.root 
-        = std::shared_ptr<HuffTree::HuffNode>(
-            new HuffTree::HuffNode(new_str, new_total)
+        = std::shared_ptr<HuffNode>(
+            new HuffNode(new_str, new_total)
         );
     new_huff.root->is_leaf = false;
     new_huff.root->left = l_op.root;
@@ -153,14 +167,6 @@ bool operator < (HuffTree& l_op, HuffTree& r_op)
 
 std::ostream& operator<< (std::ostream& os, const HuffTree& huff)
 {
-    os << huff.root->str << "," << huff.root->total << " ";
-    if (huff.root->left != nullptr)
-    {
-        os << huff.root->left->str << "," << huff.root->left->total << " ";
-    }
-    if (huff.root->right != nullptr)
-    {
-        os << huff.root->right->str << "," << huff.root->right->total << " ";
-    }
+    os << *huff.root;
     return os;
 }

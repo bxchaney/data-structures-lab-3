@@ -41,7 +41,7 @@ FrequencyTable& Decoder::get_freq_table()
     return ft;
 }
 
-EncodingTable Decoder::get_code_table()
+EncodingTable& Decoder::get_code_table()
 {
     return huff.get_encoding_table();
 }

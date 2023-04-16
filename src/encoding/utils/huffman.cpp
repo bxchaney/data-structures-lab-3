@@ -195,3 +195,8 @@ EncodingTable& Huffman::get_encoding_table()
     return code_table;
 }
 
+HuffTree& Huffman::get_tree()
+{
+    return huff_heap[0];
+}
+

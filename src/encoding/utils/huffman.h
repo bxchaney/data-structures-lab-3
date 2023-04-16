@@ -42,5 +42,7 @@ class Huffman
 
         EncodingTable& get_encoding_table();
 
+        HuffTree& get_tree();
+
         friend std::ostream& operator<<(std::ostream&, Huffman&);
 };
