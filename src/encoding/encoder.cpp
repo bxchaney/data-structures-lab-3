@@ -80,6 +80,7 @@ void Encoder::write_encoding(std::istream& is)
         if (c == '\n')
         {
             encoded_message << std::endl;
+            continue;
         }
         // ignoring punctuation
         else if (
@@ -101,7 +102,7 @@ void Encoder::write_encoding(std::istream& is)
             )
         {
             // converting to uppercase
-            s = c + 32;
+            s = c - 32;
         }
         else 
         {
