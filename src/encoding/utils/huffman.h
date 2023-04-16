@@ -15,6 +15,8 @@ class Huffman
 
         std::unique_ptr<std::string[]> characters;
 
+        EncodingTable code_table;
+
         void heapify();
         void min_heapify(int);
         void swap(int, int);
@@ -38,7 +40,7 @@ class Huffman
 
         std::string get_code(std::string);
 
-        EncodingTable get_encoding_table();
+        EncodingTable& get_encoding_table();
 
         friend std::ostream& operator<<(std::ostream&, Huffman&);
 };

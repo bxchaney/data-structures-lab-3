@@ -30,6 +30,7 @@ class EncodingTable
     public:
         EncodingTable() = default;
         EncodingTable(const EncodingTable&);
+        EncodingTable& operator=(const EncodingTable&);
         ~EncodingTable();
         
         void push(std::string, std::string);

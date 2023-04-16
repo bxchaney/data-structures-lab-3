@@ -52,6 +52,12 @@ FrequencyTable::FrequencyTable(std::istream& is)
     std::string s;
     std::string _;
     int i; 
+
+    // first check that the first character is not " "
+    s = is.get();
+    is >> _;
+    is >> i;
+    push(s,i);
     while (!is.eof())
     {
         is >> s;

@@ -110,6 +110,11 @@ void Huffman::create_huff_tree()
         HuffTree joined = left + right;
         push(joined);
     }
+    for (int i = _heap_max_size - 1; i >= 0; i--)
+    {
+        std::string encoding = get_code(characters[i]);
+        code_table.push(characters[i], encoding);
+    }
 }
 
 HuffTree Huffman::pop()
@@ -185,15 +190,8 @@ std::string Huffman::get_code(std::string c)
     return huff_heap[0].get_code(c);
 }
 
-EncodingTable Huffman::get_encoding_table()
+EncodingTable& Huffman::get_encoding_table()
 {
-    EncodingTable code_table {};
-    for (int i = _heap_max_size - 1; i >= 0; i--)
-    {
-        std::string encoding = get_code(characters[i]);
-        code_table.push(characters[i], encoding);
-    }
-
     return code_table;
 }
 

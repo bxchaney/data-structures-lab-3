@@ -4,6 +4,7 @@
 #include"utils/freq_table.h"
 #include"utils/tree_map.h"
 #include"utils/huffman.h"
+#include"code_table.h"
 #include"encoder.h"
 
 Encoder::Encoder(FrequencyTable& ft)
@@ -31,9 +32,9 @@ void Encoder::make_encoding(std::istream& is)
         s = is.get();
         if (s == "\n")
         {
-            s_stream << std::endl;
+            s_stream << "\n";
         }
-        else if (s == "\r")
+        else if (s == "\r" || s > "z")
         {
             continue;
         }
@@ -53,12 +54,12 @@ void Encoder::write_encoding()
     std::string s;
     while (s_stream)
     {
-        s_stream >> s;
+        s = s_stream.get();
         if (s == "\n")
         {
-            encoded_message << std::endl;
+            encoded_message << "\n";
         }
-        else if (s == "\r")
+        else if (s == "\r" || s > "z")
         {
             continue;
         }
@@ -108,6 +109,16 @@ void Encoder::write_encoding(std::istream& is)
         }
         encoded_message << huff.get_code(s);
     }
+}
+
+FrequencyTable& Encoder::get_frequency_table()
+{
+    return ft;
+}
+
+EncodingTable& Encoder::get_code_table()
+{
+    return huff.get_encoding_table();
 }
 
 std::ostream& operator<<(std::ostream& os, Encoder& en)

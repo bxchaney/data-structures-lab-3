@@ -88,10 +88,14 @@ std::string HuffTree::get_code(std::string& c)
             curr_node = curr_node->left;
             out = out + "0";
         }
-        else 
+        else if (curr_node->right->str.find(c) != std::string::npos)
         {
             curr_node = curr_node->right;
             out = out + "1";
+        }
+        else
+        {
+            break;
         }
     }
     return out;

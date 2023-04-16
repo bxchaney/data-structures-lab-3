@@ -21,6 +21,19 @@ EncodingTable::EncodingTable(const EncodingTable& other)
     }
 }
 
+EncodingTable& EncodingTable::operator=(const EncodingTable& other)
+{
+    _head = nullptr;
+    _tail = nullptr;
+    std::shared_ptr<EncodingNode> curr_node = other._head;
+    while (curr_node != nullptr)
+    {
+        push(curr_node->code.character, curr_node->code.encoding);
+        curr_node = curr_node->next;
+    }
+    return *this;
+}
+
 EncodingTable::~EncodingTable()
 {
     _tail = nullptr;
