@@ -190,6 +190,10 @@ void TreeMap::set_child(
     update_height(parent);
 }
 
+/// @brief this method replaces a node's child with another node
+/// @param parent node with a child being replaced
+/// @param curr_node current child
+/// @param new_node new child
 void TreeMap::replace_child(
     std::shared_ptr<TreeNode> parent,
     std::shared_ptr<TreeNode> curr_node,
@@ -206,12 +210,18 @@ void TreeMap::replace_child(
     }
     else
     {
+        // should never be accessed
         std::cout << "Failed to replace with node: ";
         std::cout << new_node->record.str << " ";
         std::cout << new_node->record.frequency << std::endl;
     }
 }
 
+/// @brief returns the balance of a node, taken as the height of the 
+/// left child less the height of the right child. If either child is
+/// null, it's height is -1
+/// @param node 
+/// @return 
 int TreeMap::get_balance(std::shared_ptr<TreeNode> node)
 {
     int left_height = -1;
@@ -229,6 +239,8 @@ int TreeMap::get_balance(std::shared_ptr<TreeNode> node)
     return left_height - right_height;
 }
 
+/// @brief performs a right rotation at node
+/// @param node the node being rotated about
 void TreeMap::rotate_right(std::shared_ptr<TreeNode> node)
 {
     // assume that the left child is non-null
@@ -247,6 +259,8 @@ void TreeMap::rotate_right(std::shared_ptr<TreeNode> node)
     set_child(node, 0, left_right_child);
 }
 
+/// @brief performs a left rotation at node
+/// @param node the node being rotated about
 void TreeMap::rotate_left(std::shared_ptr<TreeNode> node)
 {
     // assume that the right child is non-null
@@ -265,12 +279,16 @@ void TreeMap::rotate_left(std::shared_ptr<TreeNode> node)
     set_child(node, 1, right_left_child);
 }
 
+/// @brief this method is called after a new node is added and the tree
+/// is now out of balance. It performs rotations at the unbalanced nodes.
+/// @param node the node being rebalanced.
 void TreeMap::rebalance(std::shared_ptr<TreeNode> node)
 {
     update_height(node);
     int node_balance = get_balance(node);
     if (node_balance == -2)
     {
+        // right-left rotation case
         if (get_balance(node->right) == 1)
         {
             rotate_right(node->right);
@@ -279,6 +297,7 @@ void TreeMap::rebalance(std::shared_ptr<TreeNode> node)
     }
     else if (node_balance == 2)
     {
+        // left-rigth rotation case
         if (get_balance(node->left) == -1)
         {
             rotate_left(node->left);
@@ -287,6 +306,9 @@ void TreeMap::rebalance(std::shared_ptr<TreeNode> node)
     }
 }
 
+/// @brief returns the TreeRecord that has str as one of its fields
+/// @param str a single character string
+/// @return 
 TreeRecord& TreeMap::get(std::string str)
 {
     // assuming that the tree is non-empty and str is a member of the tree
@@ -306,9 +328,14 @@ TreeRecord& TreeMap::get(std::string str)
             curr = curr->right;
         }
     }
+    // curr should never be nullptr, by construction
+    // so this should never result in a segfault
     return curr->record;
 }
 
+/// @brief allowing the user to access elements of TreeMap with []
+/// @param str
+/// @return 
 TreeRecord& TreeMap::operator[](std::string str)
 {
     if (!search(str))
@@ -321,41 +348,13 @@ TreeRecord& TreeMap::operator[](std::string str)
 
 int TreeMap::max(int a, int b)
 {
-    if (a >= b) return a;
-    return b;
+    return (a >= b) ? a : b;
 }
 
-void TreeMap::preorder_traversal()
-{
-    if (root == nullptr)
-    {
-        std::cout << "No Nodes!" << std::endl;
-    }
-
-    visit(root);
-
-}
-
-void TreeMap::visit(std::shared_ptr<TreeNode> node)
-{
-    if (node == nullptr) return;
-    std::string left_data;
-    std::string right_data;
-    
-    if (node->left != nullptr)
-    {
-        left_data = node->left->record.str;
-    }
-    if (node->right != nullptr)
-    {
-        right_data = node->right->record.str;
-    }
-
-    std::cout << node->record.str << " " << left_data << " " << right_data << std::endl;
-    visit(node->left);
-    visit(node->right);
-}
-
+/// @brief this method populates ft with the str and frequency values stored
+/// at every node.
+/// @param ft an empty FrequencyTable
+/// @param node the root node
 void TreeMap::push_values(FrequencyTable& ft, std::shared_ptr<TreeNode> node)
 {
     if (node == nullptr) return;
@@ -364,6 +363,9 @@ void TreeMap::push_values(FrequencyTable& ft, std::shared_ptr<TreeNode> node)
     push_values(ft, node->right);
 }
 
+/// @brief This method populates ft with the str and frequency values stored
+/// at every node of the tree.
+/// @param ft an empty FrequencyTable
 void TreeMap::fill_freq_table(FrequencyTable& ft)
 {
     // Assuming the ft is empty, push all elements in TreeMap
