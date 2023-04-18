@@ -1,3 +1,11 @@
+/**
+ * Encoding Table is a singly-linked list used to store the character its
+ * huffman code. This object supports adding new elements to the list and
+ * has overloaded the << operator to allow writing its contents directly
+ * to a std::ostream
+ * 
+ */
+
 #pragma once 
 #include<iostream>
 #include<string>

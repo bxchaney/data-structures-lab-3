@@ -1,3 +1,12 @@
+/**
+ * Huffman contains the priority queue that constructs our huffman tree
+ * and contains a number of utility objects as class members. This object
+ * is the main utility for the Encoder and Decoder abstractions and provides
+ * wrapper methods to allow those abstractions access to the members of this
+ * class.
+ * 
+ */
+
 #pragma once
 #include<iostream>
 #include<memory>

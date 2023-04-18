@@ -40,6 +40,9 @@ FrequencyTable::~FrequencyTable()
     _tail = nullptr;
 }
 
+/// @brief FrequencyTable constructor is overloaded to read a frequency
+/// table from an opened file via a std::istream.
+/// @param is an open file of a frequency table.
 FrequencyTable::FrequencyTable(std::istream& is)
 {
     _size = 0;
@@ -105,6 +108,9 @@ std::ostream& operator<< (std::ostream& os, FrequencyTable& ft)
     return os;
 }
 
+/// @brief add a new record to the FrequencyTable
+/// @param str a single character string
+/// @param frequency str's frequency
 void FrequencyTable::push(std::string str, int frequency)
 {
     FrequencyTableRecord rec {str, frequency};
@@ -124,6 +130,8 @@ void FrequencyTable::push(std::string str, int frequency)
     _size++;
 }
 
+/// @brief Add a FrequencyTableRecord to the end of FrequencyTable
+/// @param rec
 void FrequencyTable::push(FrequencyTableRecord rec)
 {
     std::shared_ptr<FrequencyTableNode> node 
@@ -142,6 +150,8 @@ void FrequencyTable::push(FrequencyTableRecord rec)
     _size++;
 }
 
+/// @brief remove and return the last node of FrequencyTable
+/// @return a reference to a FrequencyTableRecord struct
 FrequencyTableRecord& FrequencyTable::pop()
 {
     std::shared_ptr<FrequencyTableNode> node;

@@ -48,6 +48,10 @@ HuffTree& HuffTree::operator=(const HuffTree&& other)
     return *this;
 }
 
+/// @brief returns true if str represents a valid path through the tree
+/// to a leaf containing a character
+/// @param str a string of 0's and 1's representing an encoding
+/// @return 
 bool HuffTree::is_character_encoding(std::string& str)
 {
     // given a string of 0's and 1's, confirm if that string is an encoded
@@ -71,6 +75,11 @@ bool HuffTree::is_character_encoding(std::string& str)
     return curr_node->is_leaf;
 }
 
+/// @brief returns the character that corresponds to the provided huffman
+/// code
+/// @param str a string of 0's and 1's representing a path through the
+/// tree
+/// @return 
 std::string& HuffTree::get_character(std::string& str)
 {
     std::shared_ptr<HuffNode> curr_node = root;
@@ -90,7 +99,10 @@ std::string& HuffTree::get_character(std::string& str)
     return curr_node->str;
 }
 
-
+/// @brief returns the encoding, as a string of 0's and 1's, for a given
+/// character
+/// @param c the character to be searched for
+/// @return 
 std::string HuffTree::get_code(std::string& c)
 {
     std::string out = "";
@@ -130,6 +142,8 @@ HuffTree operator + (HuffTree& l_op, HuffTree& r_op)
     return new_huff;
 }
 
+/// @brief overload to facilitate precedence comparisions between two huffman
+/// trees
 bool operator < (HuffTree& l_op, HuffTree& r_op)
 {
     if (l_op.root->total < r_op.root->total)

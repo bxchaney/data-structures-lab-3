@@ -1,5 +1,8 @@
 /**
- * Frequency table is doubly-linked list
+ * Frequency table is doubly-linked list storing a single character string
+ * and its frequency at each node. This ADT is an abstraction of the frequency
+ * table used to create a huffman tree with each node being a record in the
+ * frequency table.
  * 
  */
 #pragma once

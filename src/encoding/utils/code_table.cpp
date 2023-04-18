@@ -40,6 +40,10 @@ EncodingTable::~EncodingTable()
     _head->~EncodingNode();
 }
 
+/// @brief add a new entry to EncodingTable with the provided character and 
+/// corresponding huffman code
+/// @param character a single character
+/// @param encoding character's huffman code
 void EncodingTable::push(std::string character, std::string encoding)
 {
     Encoding code {character, encoding};
@@ -57,6 +61,13 @@ void EncodingTable::push(std::string character, std::string encoding)
     _tail = node;
 }
 
+/// @brief Overloaded << to allow writing the contents of EncodingTable to 
+/// a std::ostream. This overload writes each entry as:
+///   character - encoding
+/// for each character and encoding at each node
+/// @param os an ostream
+/// @param et an EncodingTable
+/// @return an ostream with the character representation of et.
 std::ostream& operator<<(std::ostream& os, EncodingTable& et)
 {
     std::shared_ptr<EncodingTable::EncodingNode> curr_node = et._head;

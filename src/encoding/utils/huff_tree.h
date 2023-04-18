@@ -1,3 +1,12 @@
+/**
+ * HuffTree is a huffman tree. It is constructed by a Huffman object and
+ * has overloaded methods to facilitate determining which of two huffman
+ * trees has greater or lesser precedence and to combine two huffman trees
+ * into one. This ADT also allows the user to get the encoding for a given
+ * charcter and returns the character for a given encoding.
+ * 
+ */
+
 #pragma once 
 #include<memory>
 #include<string>
