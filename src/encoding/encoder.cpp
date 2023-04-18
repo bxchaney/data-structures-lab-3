@@ -7,6 +7,10 @@
 #include"code_table.h"
 #include"encoder.h"
 
+/// @brief overload to allow the user to provide a frequency table. If a
+/// frequency table is not provided at initialization, Encoder will create
+/// a frequency table from the clear text file.
+/// @param ft 
 Encoder::Encoder(FrequencyTable& ft)
 {
     this->ft = ft;
@@ -14,6 +18,8 @@ Encoder::Encoder(FrequencyTable& ft)
     huff.from_freq(ft);
 }
 
+/// @brief Converts the provided clear text document to an encoded document
+/// @param is 
 void Encoder::encode(std::istream& is)
 {
     if (!_freq_table_provided)
@@ -24,6 +30,9 @@ void Encoder::encode(std::istream& is)
     write_encoding(is);
 }
 
+/// @brief this method is only called if the user does not provide a frequency
+/// table. This method builds a frequency table and its corresponding huffman tree
+/// @param is 
 void Encoder::make_encoding(std::istream& is)
 {
     std::string s;
@@ -48,6 +57,7 @@ void Encoder::make_encoding(std::istream& is)
     huff.from_freq(ft);
 }
 
+/// @brief This method writes the encoded mesage to encoded_message
 void Encoder::write_encoding()
 {
     // case when freq table is not provided
@@ -70,6 +80,7 @@ void Encoder::write_encoding()
     }
 }
 
+/// @brief This method writes the encoded mesage to encoded_message
 void Encoder::write_encoding(std::istream& is)
 {
     char c;
@@ -112,11 +123,15 @@ void Encoder::write_encoding(std::istream& is)
     }
 }
 
+/// @brief returns a reference to the member FrequencyTable
+/// @return 
 FrequencyTable& Encoder::get_frequency_table()
 {
     return ft;
 }
 
+/// @brief returns the EncodingTable stored in the member Huffman
+/// @return 
 EncodingTable& Encoder::get_code_table()
 {
     return huff.get_encoding_table();

@@ -12,6 +12,9 @@ Decoder::Decoder(std::istream& freq_table)
     huff.from_freq(ft);
 }
 
+/// @brief decodes the message provided in the std::istream
+/// @param is a std::istream from a file containing a huffman encoded
+/// message
 void Decoder::decode(std::istream& is)
 {
     // we assume that the encoded message is only 0's, 1's, and newlines
@@ -21,7 +24,11 @@ void Decoder::decode(std::istream& is)
     {
         if (c == '\n')
         {
-            if( s != "" && s != "\r") { std::cout << "uh oh: |" << s << "|"<< std::endl;}
+            if( s != "" && s != "\r") 
+            { 
+                // this should never happen
+                std::cout << "uh oh: |" << s << "|"<< std::endl;
+            }
             decoded_message << std::endl;
             s = "";
             continue;
@@ -36,11 +43,16 @@ void Decoder::decode(std::istream& is)
     }
 }
 
+/// @brief returns a reference to the member FrequencyTable
+/// @return 
 FrequencyTable& Decoder::get_freq_table()
 {
     return ft;
 }
 
+/// @brief returns a reference to the EncodingTable that is a member
+/// of the member Huffman
+/// @return 
 EncodingTable& Decoder::get_code_table()
 {
     return huff.get_encoding_table();

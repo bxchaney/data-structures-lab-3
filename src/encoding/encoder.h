@@ -1,3 +1,10 @@
+/**
+ * Encoder is the abstraction used to convert a clear text document to a
+ * huffman-encoded document. The user can provide a frequency table, or the
+ * program will create a frequency table itself to complete the encoding.
+ * 
+ */
+
 #pragma once
 #include<iostream>
 #include<fstream>

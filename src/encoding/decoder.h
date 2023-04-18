@@ -1,3 +1,10 @@
+/**
+ * Decoder is the ADT used to decode a huffman-encoded document. It can be
+ * initialized with a FrequencyTable object and then you can have a message
+ * decoded by passing a std::istream to the decode() method.
+ * 
+ */
+
 #pragma once
 #include<iostream>
 #include<fstream>
@@ -28,6 +35,9 @@ class Decoder
 
         EncodingTable& get_code_table();
 
+        /// @brief returns a referece to the huffman tree used to decode
+        /// the message
+        /// @return 
         HuffTree& get_tree(){return huff.get_tree();}
 
         friend std::ostream& operator<<(std::ostream&, Decoder&);
