@@ -57,6 +57,8 @@ TreeMap::~TreeMap()
     }
 }
 
+/// @brief adds a new node to the tree with the provided string value
+/// @param str a single character string
 void TreeMap::insert(std::string str)
 {
     _size++;
@@ -67,12 +69,12 @@ void TreeMap::insert(std::string str)
         return;
     }
 
-
     std::shared_ptr<TreeNode> node = std::shared_ptr<TreeNode>(
             new TreeNode(rec)
         );
 
     std::shared_ptr<TreeNode> curr = root;
+    // searching for a place to insert the new node
     while (curr != nullptr)
     {
         if (str < curr->record.str)
@@ -101,7 +103,7 @@ void TreeMap::insert(std::string str)
             }
         }
     }
-
+    // rebalance the tree if necessary
     node = node->parent;
     while (node != nullptr)
     {

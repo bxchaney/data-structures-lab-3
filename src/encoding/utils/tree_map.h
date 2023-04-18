@@ -1,3 +1,10 @@
+/**
+ * TreeMap is an AVL implementation of a self balancing tree. This ADT is used
+ * to tally the frequency of individual characters when creating a frequency
+ * table from scratch.
+ * 
+ */
+
 #pragma once
 #include<memory>
 #include<string>
