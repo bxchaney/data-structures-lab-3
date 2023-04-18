@@ -3,6 +3,8 @@
  * to tally the frequency of individual characters when creating a frequency
  * table from scratch.
  * 
+ * This implemenation follows the implementation in the textbook.
+ * 
  */
 
 #pragma once

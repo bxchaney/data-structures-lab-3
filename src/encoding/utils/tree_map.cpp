@@ -112,6 +112,10 @@ void TreeMap::insert(std::string str)
     }
 }
 
+/// @brief searches for a given string in the tree. Returns true if that
+/// string is already in the tree
+/// @param str a single character string
+/// @return 
 bool TreeMap::search(std::string str)
 {
     if (root == nullptr) // tree is empty
@@ -138,6 +142,9 @@ bool TreeMap::search(std::string str)
     return false;
 }
 
+/// @brief updates the height of a node by taking the max height of its
+/// children and adding 1
+/// @param node 
 void TreeMap::update_height(std::shared_ptr<TreeNode> node)
 {
     int left_height = -1;
@@ -155,6 +162,12 @@ void TreeMap::update_height(std::shared_ptr<TreeNode> node)
     node->height = max(left_height, right_height) + 1;
 }
 
+/// @brief sets a new child as either the left or right child of the parent.
+/// This method also updates the height of the parent after adding the new 
+/// child.
+/// @param parent a node recieving a new child
+/// @param which_child 0 for left child or 1 for right child
+/// @param new_child 
 void TreeMap::set_child(
     std::shared_ptr<TreeNode> parent,
     int which_child,
