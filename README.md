@@ -1,5 +1,9 @@
 # ChaneyBLab3
 
+## Lab 3
+
+The assignment is to implement a Huffman encoding and decoding. Given an encoded document and a frequency table, the program is able to decode the document. Given an unencoded document, the program will create a frequency table if one is not already provided, and then store an encoded version of the document.
+
 ## Configuration Info
 
 Operating System: Ubuntu 22.04
